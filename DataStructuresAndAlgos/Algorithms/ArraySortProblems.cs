@@ -135,7 +135,7 @@ namespace Algorithms
             }
         }
 
-        public static void SortedSquares(int[] array)
+        public static int[] SortedSquares(int[] array)
         {
             int Left = 0;
             int Right = array.Length - 1;
@@ -155,10 +155,7 @@ namespace Algorithms
                 }
             }
 
-            for (int i = 0; i < sortedSquares.Length; i++)
-            {
-                Console.WriteLine(sortedSquares[i]);
-            }
+            return sortedSquares;
         }
     }
 }

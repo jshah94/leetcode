@@ -67,7 +67,7 @@ namespace Algorithms
                 }
             }
 
-            return -1;
+            return mid;
         }
 
         public static int ShiftedBinarySearchII(int[] nums, int target)

@@ -10,7 +10,6 @@ namespace ConsoleApp1
     {
         static void Main(string[] args)
         {
-            Console.WriteLine($"Int Min: {int.MinValue}, Int Max: {int.MaxValue}");
             GeneralProblems.Divide(-2147483648, -1);
             //Rob(new int[] { 1, 2, 3, 1 });
             //LargestRectangleArea(new int[] { 2, 1, 2 });
@@ -176,9 +175,7 @@ namespace ConsoleApp1
 
             //var response = ShiftedBinarySearch(sampleArray2, 21);
             //SortedSquares(new int[] { -6, -3, 0, 2, 4, 7 });
-            //Console.WriteLine(response);
-
-            //Console.Read();
+            
         }
     }
 }
