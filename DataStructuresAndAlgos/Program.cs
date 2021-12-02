@@ -67,7 +67,7 @@ namespace ConsoleApp1
             board[0] = new char[] { 'A', 'B', 'C', 'E' };
             board[1] = new char[] { 'S', 'F', 'E', 'S' };
             board[2] = new char[] { 'A', 'D', 'E', 'E' };
-            Graphs2DArrayProblems.MaximalRectangle(null);
+            GraphsProblems.MaximalRectangle(null);
             //Console.WriteLine(Exist(board, "ABCEFSADEESE"));
             //Console.WriteLine(HammingDistanceII(1, 4));
             //int[] disappear = new int[] { 4, 3, 2, 7, 8, 2, 3, 1 };
@@ -91,7 +91,7 @@ namespace ConsoleApp1
                                       };
             int[,] graph = new int[,] { { 1, 1, 1, 0, 1, 1, 0, 0, 0, 1, 0 } };
 
-            Console.WriteLine(Graphs2DArrayProblems.RiverSizes(graph));
+            Console.WriteLine(GraphsProblems.RiverSizes(graph));
             //Console.WriteLine("babad".Substring(0, 5));
             //int[,] matrix = new int[3, 2];
             //Console.WriteLine(matrix.Length);
@@ -105,7 +105,7 @@ namespace ConsoleApp1
                 Console.WriteLine("\n");
             }
             ArrayProblems.FindThreeLargestNumbers(new int[] { 141, 1, 17, -7, -17, -27, 18, 541, 8, 7, 7 });
-            Graphs2DArrayProblems.GraphConstructionAndTraversal(3, 2);
+            GraphsProblems.GraphConstructionAndTraversal(3, 2);
             //Console.WriteLine(WaterArea(new int[0]));
             //GenerateParenthesis(3);
             int[] array = new int[] { 1, 3, 5, 6 };

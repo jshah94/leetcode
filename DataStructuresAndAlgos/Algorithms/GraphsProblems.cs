@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Algorithms
 {
-    public class Graphs2DArrayProblems
+    public class GraphsProblems
     {
         public static int MinimumPassesOfMatrix()
         {
