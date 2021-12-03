@@ -10,7 +10,22 @@ namespace ConsoleApp1
     {
         static void Main(string[] args)
         {
-            GeneralProblems.Divide(-2147483648, -1);
+            int[][] arr = new int[2][];
+            arr[0] = new int[] { 1, 4 };
+            arr[1] = new int[] { 1, 4 };
+            ArrayProblems.Merge(arr);
+
+            //TreeProblems.SortedArrayToBST(new int[] { -10, -3, 0, 5, 9});
+            
+            //string[][] str = new string[3][];
+            //str[0] = new string[] { "London", "New York" };
+            //str[1] = new string[] { "New York", "Lima" };
+            //str[2] = new string[] { "Lima", "Sao Paulo" };
+            //ArrayProblems.DestCity(str);
+            
+            
+            //ArrayProblems.MinCostClimbingStairs(new int[] { 0, 0, 1, 1 });
+            //GeneralProblems.Divide(-2147483648, -1);
             //Rob(new int[] { 1, 2, 3, 1 });
             //LargestRectangleArea(new int[] { 2, 1, 2 });
             //IsPalindrome(121);

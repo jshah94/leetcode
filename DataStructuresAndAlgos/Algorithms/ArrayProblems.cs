@@ -140,7 +140,6 @@ namespace Algorithms
                 else
                     j++;
             }
-            Console.WriteLine($"Minimum difference :{minimumDifference}");
             return resultAarray;
         }
 
@@ -173,10 +172,6 @@ namespace Algorithms
                     right--;
                 }
 
-            }
-            foreach (var item in array)
-            {
-                Console.WriteLine(item);
             }
             return array;
         }
@@ -224,13 +219,25 @@ namespace Algorithms
                     int left = i - 1;
                     int right = i + 1;
                     while ((left > 0 && right < array.Length - 1) &&
-                        array[left + 1] < array[left] || array[right - 1] < array[right])
+                        array[left - 1] < array[left] && array[right + 1] < array[right])
                     {
-
+                        left--;
+                        right++;
                     }
+                    while (left > 0 &&
+                        array[left - 1] < array[left])
+                    {
+                        left--;
+                    }
+                    while (right < array.Length - 1 &&
+                         array[right + 1] < array[right])
+                    {
+                        right++;
+                    }
+                    longestPeak = Math.Max(longestPeak, right - left);
                 }
             }
-            return -1;
+            return longestPeak;
         }
 
         public static List<List<int>> TaskAssignment(int k, List<int> tasks)
@@ -377,12 +384,16 @@ namespace Algorithms
 
         public static int MaxSubArray(int[] nums)
         {
-            if (nums.Length == 1)
-                return nums[0];
-            int maxSubArraySum = 0;
-
-
-            return maxSubArraySum;
+            int maxSub = nums[0];
+            int currentSum = 0;
+            for (int i = 0; i < nums.Length; i++)
+            {
+                if (currentSum < 0)
+                    currentSum = 0;
+                currentSum += nums[i];
+                maxSub = Math.Max(currentSum, maxSub);
+            }
+            return maxSub;
         }
         public static int NonConstructibleChange(int[] coins)
         {
@@ -877,5 +888,84 @@ namespace Algorithms
             return true;
         }
 
+        public static int MinCostClimbingStairs(int[] cost)
+        {
+            for (int i = 2; i < cost.Length; i++)
+            {
+                cost[i] += Math.Min(cost[i - 1], cost[i - 2]);
+            }
+            return Math.Min(cost[cost.Length - 1], cost[cost.Length - 2]);
+        }
+
+        /// <summary>
+        /// 
+        /// [["London","New York"],["New York","Lima"],["Lima","Sao Paulo"]]
+        /// 
+        /// Input: paths = [["B","C"],["D","B"],["C","A"]]
+        /// Output: "A"
+        /// Explanation: All possible trips are: 
+        /// "D" -> "B" -> "C" -> "A". 
+        /// "B" -> "C" -> "A". 
+        /// "C" -> "A". 
+        /// "A". 
+        /// Clearly the destination city is "A".
+        /// </summary>
+        /// <param name="paths"></param>
+        /// <returns></returns>
+        public static string DestCity(IList<IList<string>> paths)
+        {
+            Dictionary<string, string> maps = new Dictionary<string, string>();
+            foreach (IList<string> path in paths)
+            {
+                maps.Add(path[0], path[1]);
+            }
+            string destination = "";
+            foreach (var map in maps)
+            {
+                if (!maps.ContainsKey(map.Value))
+                {
+                    destination = map.Value;
+                    break;
+                }
+            }
+            return destination;
+        }
+
+        //[[1,3],[2,6],[8,10],[15,18]]
+        public static int[][] Merge(int[][] intervals)
+        {
+            List<int[]> intervalList = new List<int[]>();
+            intervalList.Add(new int[] { intervals[0][0], intervals[0][1] });
+            for (int i = 1; i < intervals.Length; i++)
+            {
+                if (Overlap(intervals[i-1], intervals[i]))
+                {
+                    intervalList[i - 1][0] = Math.Min(intervals[i - 1][0], intervals[i][0]);
+                    intervalList[i - 1][1] = Math.Max(intervals[i - 1][1], intervals[i][1]);
+                }
+                else
+                    intervalList.Add(new int[] { intervals[i][0], intervals[i][1] });
+            }
+            
+            int[][] merged = new int[intervalList.Count][];
+            for (int i = 0; i < merged.Length; i++)
+            {
+                merged[i] = intervalList[i];
+            }
+            return merged;
+        }
+
+        public static bool Overlap(int[] interval1, int[] interval2)
+        {
+            if (interval1[1] > interval2[0] && interval2[1] > interval1[1])
+                return true;
+            else if (interval2[0] < interval1[0] && interval2[1] > interval1[1])
+                return true;
+            else if (interval1[1] == interval2[0])
+                return true;
+            else if (interval1[0] == interval2[0] && interval1[1] == interval2[1])
+                return true;
+            return false;
+        }
     }
 }

@@ -7,34 +7,34 @@ namespace Algorithms
 {
     public class TreeProblems
     {
-		/// <summary>
-		/// Get's the successor of the node
-		/// </summary>
-		/// <param name="tree"></param>
-		/// <param name="node"></param>
-		/// <returns></returns>
-		public BinaryTree FindSuccessor(BinaryTree tree, BinaryTree node)
-		{
-			// Write your code here.
-			if (node.Right != null)
-				return GetLeftMost(node.Right);
-			return GetRightmostParent(node);
-		}
+        /// <summary>
+        /// Get's the successor of the node
+        /// </summary>
+        /// <param name="tree"></param>
+        /// <param name="node"></param>
+        /// <returns></returns>
+        public BinaryTree FindSuccessor(BinaryTree tree, BinaryTree node)
+        {
+            // Write your code here.
+            if (node.Right != null)
+                return GetLeftMost(node.Right);
+            return GetRightmostParent(node);
+        }
 
-		public BinaryTree GetLeftMost(BinaryTree tree)
-		{
-			var current = tree;
-			while (current.Left != null)
-				current = current.Left;
-			return current;
-		}
-		public BinaryTree GetRightmostParent(BinaryTree tree)
-		{
-			var current = tree;
-			while (current.Parent != null && current.Parent.Right == current)
-				current = current.Parent;
-			return current.Parent;
-		}
+        public BinaryTree GetLeftMost(BinaryTree tree)
+        {
+            var current = tree;
+            while (current.Left != null)
+                current = current.Left;
+            return current;
+        }
+        public BinaryTree GetRightmostParent(BinaryTree tree)
+        {
+            var current = tree;
+            while (current.Parent != null && current.Parent.Right == current)
+                current = current.Parent;
+            return current.Parent;
+        }
 
         public List<int> InOrderTraverse(BinarySearchTree tree, List<int> array)
         {
@@ -350,5 +350,29 @@ namespace Algorithms
             ancestors.Add(decendant);
         }
 
+        //[0,1,2,3,4,5]
+        public static TreeNode SortedArrayToBST(int[] nums)
+        {
+            int mid = nums.Length / 2;
+            TreeNode root = new TreeNode(nums[0]);
+            var current = root;
+            int i = mid - 1;
+            while (i >= 0)
+            {
+                current.left = new TreeNode(nums[i]);
+                current = current.left;
+                i--; ;
+            }
+            int j = mid + 1;
+            current = root;
+            while (j < nums.Length)
+            {
+                current.right = new TreeNode(nums[j]);
+                current = current.right;
+                j++;
+            }
+            return root;
+        }
     }
+
 }
