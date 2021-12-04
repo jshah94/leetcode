@@ -537,8 +537,6 @@ namespace Algorithms
             return nums[start];
         }
 
-
-
         public static int RemoveElement(int[] nums, int val)
         {
             int start = 0;
@@ -938,7 +936,7 @@ namespace Algorithms
             intervalList.Add(new int[] { intervals[0][0], intervals[0][1] });
             for (int i = 1; i < intervals.Length; i++)
             {
-                if (Overlap(intervals[i-1], intervals[i]))
+                if (Overlap(intervals[i - 1], intervals[i]))
                 {
                     intervalList[i - 1][0] = Math.Min(intervals[i - 1][0], intervals[i][0]);
                     intervalList[i - 1][1] = Math.Max(intervals[i - 1][1], intervals[i][1]);
@@ -946,7 +944,7 @@ namespace Algorithms
                 else
                     intervalList.Add(new int[] { intervals[i][0], intervals[i][1] });
             }
-            
+
             int[][] merged = new int[intervalList.Count][];
             for (int i = 0; i < merged.Length; i++)
             {
@@ -966,6 +964,48 @@ namespace Algorithms
             else if (interval1[0] == interval2[0] && interval1[1] == interval2[1])
                 return true;
             return false;
+        }
+
+        //[2,2,3,3,3,4]
+        public static int DeleteAndEarn(int[] nums)
+        {
+            int maxDeleteEarn = 0;
+            Dictionary<int, int> dict = new Dictionary<int, int>();
+            Dictionary<int, int> deleted = new Dictionary<int, int>();
+            foreach (var item in nums)
+            {
+                if (dict.ContainsKey(item))
+                    dict[item] += 1;
+                else
+                    dict.Add(item, 1);
+            }
+            foreach (var item in dict)
+            {
+                deleted.Clear();
+                int maxEarn = (item.Key * item.Value);
+                deleted.Add(item.Key, 0);
+                deleted.Add(item.Key - 1, 0);
+                deleted.Add(item.Key + 1, 0);
+                foreach(var it in dict)
+                {
+                    if (!deleted.ContainsKey(it.Key))
+                    {
+                        maxEarn = maxEarn + (it.Key * it.Value);
+                        deleted.Add(it.Key, 0);
+                        if (dict.ContainsKey(it.Key - 1) && !deleted.ContainsKey(it.Key - 1))
+                        {
+                            deleted.Add(it.Key - 1, 0);
+                        }
+                        if (dict.ContainsKey(it.Key + 1) && !deleted.ContainsKey(it.Key + 1))
+                        {
+                            deleted.Add(it.Key + 1, 0);
+                        }
+                    }
+                }
+                maxDeleteEarn = Math.Max(maxDeleteEarn, maxEarn);
+
+            }
+            return maxDeleteEarn;
         }
     }
 }

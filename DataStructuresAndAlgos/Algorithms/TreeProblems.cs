@@ -373,6 +373,83 @@ namespace Algorithms
             }
             return root;
         }
+
+        public bool IsBalanced(TreeNode root)
+        {
+            if (root == null)
+                return true;
+            if (root.left == null && root.right == null)
+                return true;
+            var tr = IsBalancedDFS(root); //0
+            if(tr.IsBalanced)
+                return true;
+            return false;
+        }
+        //20 => 0
+        public BalancedTree IsBalancedDFS(TreeNode node)
+        {
+            if (node == null)
+                return new BalancedTree { Height = 0, IsBalanced = true };
+            if (node.left == null && node.right == null)
+                return new BalancedTree { Height = 0, IsBalanced = true };
+            var left = IsBalancedDFS(node.left);
+            var right = IsBalancedDFS(node.right);
+            if (left.IsBalanced && right.IsBalanced && Math.Abs(left.Height - right.Height) <= 1)
+                return new BalancedTree { Height = Math.Max(left.Height, right.Height) + 1, IsBalanced = true };
+            else
+                return new BalancedTree { Height = Math.Max(left.Height, right.Height) + 1, IsBalanced = false };
+
+        }
+
+        public int MinDepth(TreeNode root)
+        {
+            if (root == null)
+                return 0;
+            if (root.left == null && root.right == null)
+                return 1;
+            int leftDepth = root.left != null ? MinDepth(root.left) : int.MaxValue;
+            int rightDepth = root.right != null ? MinDepth(root.right) : int.MaxValue;
+            return Math.Min(leftDepth, rightDepth) + 1;
+        }
+
+        //level order traversal is tough man
+        public static IList<IList<int>> LevelOrder(TreeNode root)
+        {
+            if (root == null)
+                return new List<IList<int>>();
+
+            int sizeInLevel = 0;
+            IList<IList<int>> results = new List<IList<int>>();
+            IList<int> resultInLevel = null;
+            Queue<TreeNode> level = new Queue<TreeNode>();
+            TreeNode currentNode = null;
+
+            level.Enqueue(root);
+
+            while (level.Count != 0)
+            {
+                sizeInLevel = level.Count;
+                resultInLevel = new List<int>();
+
+                while (sizeInLevel != 0)
+                {
+                    currentNode = level.Dequeue();
+
+                    if (currentNode.left != null)
+                        level.Enqueue(currentNode.left);
+                    if (currentNode.right != null)
+                        level.Enqueue(currentNode.right);
+
+                    resultInLevel.Add(currentNode.val);
+                    sizeInLevel--;
+                }
+
+                results.Add(resultInLevel);
+            }
+
+            return results;
+
+        }
     }
 
 }

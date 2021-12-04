@@ -10,20 +10,30 @@ namespace ConsoleApp1
     {
         static void Main(string[] args)
         {
-            int[][] arr = new int[2][];
-            arr[0] = new int[] { 1, 4 };
-            arr[1] = new int[] { 1, 4 };
-            ArrayProblems.Merge(arr);
+
+            TreeNode rootlot = new TreeNode(1);
+            rootlot.left = new TreeNode(2);
+            rootlot.right = new TreeNode(3);
+            rootlot.left.left = new TreeNode(4);
+            rootlot.right.right = new TreeNode(5);
+            TreeProblems.LevelOrder(rootlot);
+
+            //ArrayProblems.DeleteAndEarn(new int[] { 3, 7, 10, 5, 2, 4, 8, 9, 9, 4, 9, 2, 6, 4, 6, 5, 4, 7, 6, 10 });
+
+            //int[][] arr = new int[2][];
+            //arr[0] = new int[] { 1, 4 };
+            //arr[1] = new int[] { 1, 4 };
+            //ArrayProblems.Merge(arr);
 
             //TreeProblems.SortedArrayToBST(new int[] { -10, -3, 0, 5, 9});
-            
+
             //string[][] str = new string[3][];
             //str[0] = new string[] { "London", "New York" };
             //str[1] = new string[] { "New York", "Lima" };
             //str[2] = new string[] { "Lima", "Sao Paulo" };
             //ArrayProblems.DestCity(str);
-            
-            
+
+
             //ArrayProblems.MinCostClimbingStairs(new int[] { 0, 0, 1, 1 });
             //GeneralProblems.Divide(-2147483648, -1);
             //Rob(new int[] { 1, 2, 3, 1 });
