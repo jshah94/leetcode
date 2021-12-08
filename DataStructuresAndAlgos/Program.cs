@@ -10,13 +10,29 @@ namespace ConsoleApp1
     {
         static void Main(string[] args)
         {
+            Console.WriteLine(StringProblems.ConvertToTitle(27));
+            GeneralProblems.Generate(5);
+            GeneralProblems.singleNumber(new int[] { 1, 2, 1, 2, 3, 5, 3 });
 
-            TreeNode rootlot = new TreeNode(1);
-            rootlot.left = new TreeNode(2);
-            rootlot.right = new TreeNode(3);
-            rootlot.left.left = new TreeNode(4);
-            rootlot.right.right = new TreeNode(5);
-            TreeProblems.LevelOrder(rootlot);
+            //ListNode listNode1 = new ListNode(1);
+            //listNode1.next = new ListNode(0);
+            //listNode1.next.next = new ListNode(1);
+            //Console.WriteLine(GeneralProblems.GetDecimalValue(listNode1));
+
+            //-2147483648
+            //Console.WriteLine(GeneralProblems.Reverse(-1147483648));
+
+            //Console.WriteLine(GeneralProblems.FibonacciBottomUp(8));
+
+            //ArrayProblems.MinCostToMoveChips(new int[] { 1, 2, 3 });
+
+            //TreeNode rootlot = new TreeNode(1);
+            //rootlot.left = new TreeNode(-2);
+            //rootlot.right = new TreeNode(3);
+            //rootlot.left.left = new TreeNode(1);
+            //rootlot.left.left.left = new TreeNode(-1);
+            //rootlot.right.right = new TreeNode(5);
+            //TreeProblems.HasPathSum(rootlot, -1);
 
             //ArrayProblems.DeleteAndEarn(new int[] { 3, 7, 10, 5, 2, 4, 8, 9, 9, 4, 9, 2, 6, 4, 6, 5, 4, 7, 6, 10 });
 

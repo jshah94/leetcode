@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ConsoleApp1;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -260,6 +261,141 @@ namespace Algorithms
                 }
             }
             return count * sign > int.MaxValue ? int.MaxValue : (int)count * sign;
+        }
+
+        //n = 2
+        public static int FibonacciWithSlidingWindow(int n)
+        {
+            if (n <= 2)
+                return 1;
+            List<int> list = new List<int> { 0, 1, 1 };
+            int currentMax = 1;
+            for (int i = 2; i < n; i++)
+            {
+                int startWindow = list.Count - 2 - 1;
+                int endWindow = list.Count - 1;
+                if (startWindow >= 0)
+                {
+                    currentMax -= list[startWindow];
+                }
+                currentMax += list[endWindow];
+                list.Add(currentMax);
+            }
+            return currentMax;
+        }
+
+        public static int FibonacciBottomUp(int n)
+        {
+            if (n == 2 || n == 1)
+                return 1;
+            else if (n == 0)
+                return 0;
+            int previousMax = 0;
+            int currentMax = 1;
+            for (int i = 1; i < n; i++)
+            {
+                int temp = currentMax + previousMax;
+                previousMax = currentMax;
+                currentMax = temp;
+            }
+            return currentMax;
+        }
+
+        public static int Reverse(int x)
+        {
+            int rev = 0;
+            while (x != 0)
+            {
+                int pop = x % 10;
+                x /= 10;
+                if (rev > int.MaxValue / 10 || (rev == int.MaxValue / 10 && pop > 7)) return 0;
+                if (rev < int.MinValue / 10 || (rev == int.MinValue / 10 && pop < -8)) return 0;
+                rev = rev * 10 + pop;
+            }
+            return rev;
+        }
+
+        /// <summary>
+        /// This is faster on leetcode but takes more memory
+        /// </summary>
+        /// <param name="head"></param>
+        /// <returns></returns>
+        public static int GetDecimalValue(ListNode head)
+        {
+            if (head == null)
+                return 0;
+            var current = head;
+            Stack<int> stack = new Stack<int>();
+            while (current != null)
+            {
+                stack.Push(current.val);
+                current = current.next;
+            }
+            int decNumber = 0;
+            int i = 0;
+            while (stack.Count > 0)
+            {
+                int bit = stack.Pop();
+                decNumber = decNumber + (int)(bit * Math.Pow(2, i));
+                i++;
+            }
+            return decNumber;
+        }
+
+        /// <summary>
+        /// this solution is slower on leetcode but takes less memory
+        /// </summary>
+        /// <param name="head"></param>
+        /// <returns></returns>
+        public static int GetDecimalValueII(ListNode head)
+        {
+            if (head == null)
+                return 0;
+            int sum = 0;
+            while (head != null)
+            {
+                sum *= 2;
+                sum += head.val;
+                head = head.next;
+            }
+            return sum;
+        }
+
+        public static IList<IList<int>> Generate(int numRows)
+        {
+            IList<IList<int>> response = new List<IList<int>>();
+            for (int i = 0; i < numRows; i++)
+            {
+                if (i == 0)
+                {
+                    response.Add(new List<int> { 1 });
+                    continue;
+                }
+
+                var lst = new List<int>();
+                for (int j = 0; j < i + 1; j++)
+                {
+                    if (j == 0)
+                        lst.Add(1);
+                    else if (j == i)
+                        lst.Add(1);
+                    else
+                        lst.Add(response[i - 1][j - 1] + response[i - 1][j]);
+                }
+                response.Add(lst);
+            }
+
+            return response;
+        }
+
+        public static int singleNumber(int[] A)
+        {
+            int result = 0;
+            for (int i = 0; i < A.Length; i++)
+            {
+                result ^= A[i];
+            }
+            return result;
         }
     }
 }

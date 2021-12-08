@@ -427,5 +427,90 @@ namespace Algorithms
             }
             return res;
         }
+
+        public char FindTheDifference(string s, string t)
+        {
+            Dictionary<char, int> dictS = new Dictionary<char, int>();
+            Dictionary<char, int> dictT = new Dictionary<char, int>();
+
+            for (int i = 0; i < s.Length; i++)
+            {
+                if (dictS.ContainsKey(s[i]))
+                    dictS[s[i]] += 1;
+                else
+                    dictS.Add(s[i], 1);
+            }
+
+            for (int i = 0; i < t.Length; i++)
+            {
+                if (dictT.ContainsKey(t[i]))
+                    dictT[t[i]] += 1;
+                else
+                    dictT.Add(t[i], 1);
+            }
+            foreach (var itm in dictT)
+            {
+                if (dictS.ContainsKey(itm.Key) && dictS[itm.Key] == itm.Value)
+                    continue;
+                else
+                    return itm.Key;
+            }
+            return '`';
+        }
+
+        //Better solution
+        public char FindTheDifferenceII(string s, string t)
+        {
+            int charS = 0;
+            int charT = 0;
+            for (int i = 0; i < s.Length; i++)
+                charS += (int)s[i];
+            for (int i = 0; i < t.Length; i++)
+                charT += (int)t[i];
+            return (char)(charT - charS);
+        }
+
+        public static string ConvertToTitle(int columnNumber)
+        {
+            Dictionary<int, string> map = new Dictionary<int, string>();
+            map.Add(0, "A");
+            map.Add(1, "B");
+            map.Add(2, "C");
+            map.Add(3, "D");
+            map.Add(4, "E");
+
+            map.Add(5, "F");
+            map.Add(6, "G");
+            map.Add(7, "H");
+            map.Add(8, "I");
+            map.Add(9, "J");
+
+            map.Add(10, "K");
+            map.Add(11, "L");
+            map.Add(12, "M");
+            map.Add(13, "N");
+            map.Add(14, "O");
+
+            map.Add(15, "P");
+            map.Add(16, "Q");
+            map.Add(17, "R");
+            map.Add(18, "S");
+            map.Add(19, "T");
+
+            map.Add(20, "U");
+            map.Add(21, "V");
+            map.Add(22, "W");
+            map.Add(23, "X");
+            map.Add(24, "Y");
+            map.Add(25, "Z");
+            StringBuilder title = new StringBuilder();
+            while(columnNumber > 0)
+            {
+                int rem = (columnNumber - 1) % 26;
+                columnNumber = (columnNumber) / 26;
+                title.Insert(0,map[rem]);
+            }
+            return title.ToString();
+        }
     }
 }

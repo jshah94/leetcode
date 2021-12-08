@@ -450,6 +450,29 @@ namespace Algorithms
             return results;
 
         }
+
+        public static bool HasPathSum(TreeNode root, int targetSum)
+        {
+            return HasPathSum(root, targetSum, 0);
+        }
+
+        public static bool HasPathSum(TreeNode root, int targetSum, int sum)
+        {
+            if (root == null)
+                return false;
+            sum = sum + root.val;
+            if (sum == targetSum)
+            {
+                if (root.left == null && root.right == null)
+                    return true;
+                return false;
+            }
+            else
+            {
+                return (HasPathSum(root.left, targetSum, sum)
+                        || HasPathSum(root.right, targetSum, sum)) ? true : false;
+            }
+        }
     }
 
 }

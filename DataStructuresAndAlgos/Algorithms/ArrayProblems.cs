@@ -1007,5 +1007,36 @@ namespace Algorithms
             }
             return maxDeleteEarn;
         }
+
+        public static int MinCostToMoveChips(int[] position)
+        {
+            int evenCount = 0;
+            int oddCount = 0;
+            for (int i = 0; i < position.Length; i++)
+            {
+                if (position[i] % 2 == 0)
+                    evenCount++;
+                else
+                    oddCount++;
+            }
+
+            return Math.Min(evenCount, oddCount);
+        }
+
+        public static int MaximumDifference(int[] nums)
+        {
+            int maxDifference = -1;
+            int i = 0;
+            for (int j = 1; j < nums.Length; j++)
+            {
+                if (nums[i] < nums[j])
+                {
+                    maxDifference = Math.Max(maxDifference, nums[j] - nums[i]);
+                }
+                else
+                    i = j;
+            }
+            return maxDifference;
+        }
     }
 }
