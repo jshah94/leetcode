@@ -381,7 +381,7 @@ namespace Algorithms
             if (root.left == null && root.right == null)
                 return true;
             var tr = IsBalancedDFS(root); //0
-            if(tr.IsBalanced)
+            if (tr.IsBalanced)
                 return true;
             return false;
         }
@@ -465,13 +465,31 @@ namespace Algorithms
             {
                 if (root.left == null && root.right == null)
                     return true;
-                return false;
             }
-            else
-            {
-                return (HasPathSum(root.left, targetSum, sum)
-                        || HasPathSum(root.right, targetSum, sum)) ? true : false;
-            }
+
+            return (HasPathSum(root.left, targetSum, sum)
+                    || HasPathSum(root.right, targetSum, sum)) ? true : false;
+        }
+
+        public int FindTilt(TreeNode root)
+        {
+            dfs(root);
+            return sum;
+        }
+
+        int sum = 0;
+
+        public int dfs(TreeNode root)
+        {
+            if (root == null)
+                return 0;
+
+            int left = dfs(root.left);
+            int right = dfs(root.right);
+
+            sum += Math.Abs(left - right);
+
+            return (left + right + root.val);
         }
     }
 
