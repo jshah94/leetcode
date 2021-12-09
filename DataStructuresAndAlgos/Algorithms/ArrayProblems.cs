@@ -24,7 +24,6 @@ namespace Algorithms
             return new int[0];
         }
 
-
         public static void TwoSum(int[] a1, int[] a2, int target)
         {
             Dictionary<int, int> dic = new Dictionary<int, int>();
@@ -191,7 +190,6 @@ namespace Algorithms
                     {
                         response.Add(new int[] { array[i], array[left], array[right] });
                         left++;
-                        right--;
                     }
                     else if (sum > targetSum)
                     {
@@ -1037,6 +1035,89 @@ namespace Algorithms
                     i = j;
             }
             return maxDifference;
+        }
+
+        public static int MajorityElement(int[] nums)
+        {
+            int count = 1;
+            int major = nums[0];
+            for (int i = 1; i < nums.Length; i++)
+            {
+                if (count == 0)
+                {
+                    count++;
+                    major = nums[i];
+                }
+                else if (major == nums[i])
+                    count++;
+                else
+                    count--;
+            }
+            return major;
+        }
+
+        public static IList<IList<int>> Permute(int[] nums)
+        {
+            IList<IList<int>> response = new List<IList<int>>();
+            for(int i = 0; i < nums.Length; i++)
+            {
+                IList<int> list = new List<int>();
+                list.Add(nums[i]);
+                var lst = nums.ToList();
+                lst.RemoveAt(i);
+                Permute(response, list,lst.ToArray());
+            }
+
+            return response;
+        }
+
+        public static void Permute(IList<IList<int>> response, IList<int> res, int[] nums)
+        {
+            if (nums.Length == 0)
+            {
+                response.Add(res);
+                return;
+            }
+            for (int i = 0; i< nums.Length; i++)
+            {
+                var _res = new List<int>(res);
+                _res.Add(nums[i]);
+                var lst = nums.ToList();
+                lst.RemoveAt(i);
+                Permute(response, _res, lst.ToArray());
+            }
+        }
+
+        public static IList<IList<int>> ThreeSum(int[] nums)
+        {
+            Array.Sort(nums);
+            IList<IList<int>> response = new List<IList<int>>();
+            for (int i = 0; i < nums.Length; i++)
+            {
+                if (i > 0 && nums[i] == nums[i - 1])
+                    continue;
+                int first = i + 1;
+                int last = nums.Length - 1;
+                while (first < last)
+                {
+                    int result = nums[i] + nums[first] + nums[last];
+                    if (result == 0)
+                    {
+                        response.Add(new List<int> { nums[i], nums[first], nums[last] });
+                        first++;
+                        while (nums[first] == nums[first - 1] && first < last)
+                            first++;
+                    }
+                    else
+                    {
+                        if (result > 0)
+                            last--;
+                        else
+                            first++;
+                    }
+                }
+            }
+            return response;
         }
     }
 }

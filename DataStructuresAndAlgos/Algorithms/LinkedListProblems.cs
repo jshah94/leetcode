@@ -223,5 +223,20 @@ namespace Algorithms
             odd.next = evenHead;
             return head;
         }
+
+        public ListNode GetIntersectionNode(ListNode headA, ListNode headB)
+        {
+            if (null == headA || null == headB)
+                return null;
+
+            ListNode curA = headA;
+            ListNode curB = headB;
+            while (curA != curB)
+            {
+                curA = curA == null ? headB : curA.next;
+                curB = curB == null ? headA : curB.next;
+            }
+            return curA;
+        }
     }
 }

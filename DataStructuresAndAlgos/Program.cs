@@ -10,9 +10,15 @@ namespace ConsoleApp1
     {
         static void Main(string[] args)
         {
-            Console.WriteLine(StringProblems.ConvertToTitle(27));
-            GeneralProblems.Generate(5);
-            GeneralProblems.singleNumber(new int[] { 1, 2, 1, 2, 3, 5, 3 });
+            ArrayProblems.ThreeSum(new int[] { -1, 0, 1, 2, -1, -4 });
+
+            //ArrayProblems.Permute(new int[] { 1, 2, 3 });
+
+            //ArrayProblems.MajorityElement(new int[] { 2, 2, 1, 1, 1, 2, 2});
+
+            //Console.WriteLine(StringProblems.ConvertToTitle(27));
+            //GeneralProblems.Generate(5);
+            //GeneralProblems.singleNumber(new int[] { 1, 2, 1, 2, 3, 5, 3 });
 
             //ListNode listNode1 = new ListNode(1);
             //listNode1.next = new ListNode(0);

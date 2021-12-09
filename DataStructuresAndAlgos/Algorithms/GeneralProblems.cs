@@ -397,5 +397,89 @@ namespace Algorithms
             }
             return result;
         }
+
+        public string ConvertToTitle(int columnNumber)
+        {
+            Dictionary<int, string> map = new Dictionary<int, string>();
+            map.Add(0, "A");
+            map.Add(1, "B");
+            map.Add(2, "C");
+            map.Add(3, "D");
+            map.Add(4, "E");
+
+            map.Add(5, "F");
+            map.Add(6, "G");
+            map.Add(7, "H");
+            map.Add(8, "I");
+            map.Add(9, "J");
+
+            map.Add(10, "K");
+            map.Add(11, "L");
+            map.Add(12, "M");
+            map.Add(13, "N");
+            map.Add(14, "O");
+
+            map.Add(15, "P");
+            map.Add(16, "Q");
+            map.Add(17, "R");
+            map.Add(18, "S");
+            map.Add(19, "T");
+
+            map.Add(20, "U");
+            map.Add(21, "V");
+            map.Add(22, "W");
+            map.Add(23, "X");
+            map.Add(24, "Y");
+            map.Add(25, "Z");
+            StringBuilder title = new StringBuilder();
+            while (columnNumber > 0)
+            {
+                int rem = (columnNumber - 1) % 26;
+                columnNumber = (columnNumber - 1) / 26;
+                title.Insert(0, map[rem]);
+            }
+            return title.ToString();
+        }
+
+        public int TitleToNumber(string columnTitle)
+        {
+            Dictionary<string, int> map = new Dictionary<string, int>();
+            map.Add("A", 0);
+            map.Add("B", 1);
+            map.Add("C", 2);
+            map.Add("D", 3);
+            map.Add("E", 4);
+            map.Add("F", 5);
+            map.Add("G", 6);
+            map.Add("H", 7);
+            map.Add("I", 8);
+            map.Add("J", 9);
+
+            map.Add("K", 10);
+            map.Add("L", 11);
+            map.Add("M", 12);
+            map.Add("N", 13);
+            map.Add("O", 14);
+            map.Add("P", 15);
+            map.Add("Q", 16);
+            map.Add("R", 17);
+            map.Add("S", 18);
+            map.Add("T", 19);
+            map.Add("U", 20);
+            map.Add("V", 21);
+            map.Add("W", 22);
+            map.Add("X", 23);
+            map.Add("Y", 24);
+            map.Add("Z", 25);
+
+            int result = 0;
+            for(int i = 0; i< columnTitle.Length; i++)
+            {
+                result = result * 10;
+                result += (map[columnTitle[i].ToString()] + 1);
+            }
+
+            return result;
+        }
     }
 }
