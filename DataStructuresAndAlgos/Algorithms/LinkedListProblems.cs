@@ -238,5 +238,46 @@ namespace Algorithms
             }
             return curA;
         }
+
+        public ListNode RotateRight(ListNode head, int k)
+        {
+            if (head == null || head.next == null)
+                return head;
+            int listLength = GetListLength(head);
+            if (k > listLength)
+            {
+                int n = listLength + 1;
+                while (k % n == 0)
+                    k = k / n;
+            }
+            for (int i = 0; i < k; i++)
+            {
+                var current = head.next;
+                var previous = head;
+
+                while (current.next != null)
+                {
+                    previous = current;
+                    current = current.next;
+                }
+                current.next = head;
+                head = current;
+                previous.next = null;
+            }
+            return head;
+        }
+        public int GetListLength(ListNode head)
+        {
+            if (head == null)
+                return 0;
+            int length = 0;
+            var current = head;
+            while (current != null)
+            {
+                length++;
+                current = current.next;
+            }
+            return length;
+        }
     }
 }
