@@ -1,6 +1,7 @@
 ﻿using ConsoleApp1;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Algorithms
@@ -490,6 +491,35 @@ namespace Algorithms
             sum += Math.Abs(left - right);
 
             return (left + right + root.val);
+        }
+
+        public static BST ReconstructBst(List<int> preOrderTraversalValues)
+        {
+            // Write your code here.
+            if(preOrderTraversalValues.Count == 1)
+                return new BST(preOrderTraversalValues[0]);
+            if (preOrderTraversalValues.Count == 0)
+                return null;
+            int rightPointer = preOrderTraversalValues.Count;
+            BST rightBst = null;
+            BST leftBst = null;
+            for(int i = 1; i < preOrderTraversalValues.Count; i++)
+            {
+                if (preOrderTraversalValues[i] > preOrderTraversalValues[0])
+                {
+                    rightPointer = i;
+                    break;
+                }
+            }
+            if (rightPointer < preOrderTraversalValues.Count)
+            {
+                rightBst = ReconstructBst(preOrderTraversalValues.Skip(rightPointer).ToList());
+                leftBst = ReconstructBst(preOrderTraversalValues.Skip(1).Take(rightPointer-1).ToList());
+            }
+            else
+                leftBst = ReconstructBst(preOrderTraversalValues.Skip(1).ToList());
+            
+            return new BST(preOrderTraversalValues[0], leftBst, rightBst);
         }
     }
 

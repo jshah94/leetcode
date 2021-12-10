@@ -10,7 +10,9 @@ namespace ConsoleApp1
     {
         static void Main(string[] args)
         {
-            ArrayProblems.ThreeSum(new int[] { -1, 0, 1, 2, -1, -4 });
+            BST bst = TreeProblems.ReconstructBst((new int[] {10, 4, 2, 1, 5, 17, 19, 18}).ToList());
+            Console.WriteLine(bst.value);
+            //ArrayProblems.ThreeSum(new int[] { -1, 0, 1, 2, -1, -4 });
 
             //ArrayProblems.Permute(new int[] { 1, 2, 3 });
 
