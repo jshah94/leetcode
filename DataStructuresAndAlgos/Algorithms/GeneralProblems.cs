@@ -491,5 +491,19 @@ namespace Algorithms
             String[] I = { "", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX" };
             return M[num / 1000] + C[(num % 1000) / 100] + X[(num % 100) / 10] + I[num % 10];
         }
+
+        public static int NthMagicalNumber(int n, int a, int b)
+        {
+            long limit = 10000000007;
+            List<int> numbers = new List<int>();
+            for (int i = 1; i <= limit; i++)
+            {
+                if (i % a == 0 || i % b == 0)
+                    numbers.Add(i);
+                if (numbers.Count == n)
+                    break;
+            }
+            return numbers[n - 1];
+        }
     }
 }

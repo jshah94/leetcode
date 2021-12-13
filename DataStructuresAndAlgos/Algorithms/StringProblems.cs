@@ -512,5 +512,123 @@ namespace Algorithms
             }
             return title.ToString();
         }
+
+        public static string CaesarCypherEncryptor(string str, int key)
+        {
+            // Write your code here.
+            Dictionary<char, int> alpha = new Dictionary<char, int>();
+            StringBuilder response = new StringBuilder();
+            alpha.Add('a', 1);
+            alpha.Add('b', 2);
+            alpha.Add('c', 3);
+            alpha.Add('d', 4);
+            alpha.Add('e', 5);
+            alpha.Add('f', 6);
+            alpha.Add('g', 7);
+            alpha.Add('h', 8);
+            alpha.Add('i', 9);
+            alpha.Add('j', 10);
+
+            alpha.Add('k', 11);
+            alpha.Add('l', 12);
+            alpha.Add('m', 13);
+            alpha.Add('n', 14);
+            alpha.Add('o', 15);
+            alpha.Add('p', 16);
+            alpha.Add('q', 17);
+            alpha.Add('r', 18);
+            alpha.Add('s', 19);
+            alpha.Add('t', 20);
+
+            alpha.Add('u', 21);
+            alpha.Add('v', 22);
+            alpha.Add('w', 23);
+            alpha.Add('x', 24);
+            alpha.Add('y', 25);
+            alpha.Add('z', 26);
+            Dictionary<int, char> code2Char = new Dictionary<int, char>();
+            code2Char.Add(1, 'a');
+            code2Char.Add(2, 'b');
+            code2Char.Add(3, 'c');
+            code2Char.Add(4, 'd');
+            code2Char.Add(5, 'e');
+            code2Char.Add(6, 'f');
+            code2Char.Add(7, 'g');
+            code2Char.Add(8, 'h');
+            code2Char.Add(9, 'i');
+            code2Char.Add(10, 'j');
+
+            code2Char.Add(11, 'k');
+            code2Char.Add(12, 'l');
+            code2Char.Add(13, 'm');
+            code2Char.Add(14, 'n');
+            code2Char.Add(15, 'o');
+            code2Char.Add(16, 'p');
+            code2Char.Add(17, 'q');
+            code2Char.Add(18, 'r');
+            code2Char.Add(19, 's');
+            code2Char.Add(20, 't');
+
+            code2Char.Add(21, 'u');
+            code2Char.Add(22, 'v');
+            code2Char.Add(23, 'w');
+            code2Char.Add(24, 'x');
+            code2Char.Add(25, 'y');
+            code2Char.Add(26, 'z');
+            for (int i = 0; i < str.Length; i++)
+            {
+                char c = str[i];
+                int code = alpha[c];
+                code += key;
+                if(code > 26)
+                {
+                    code = code % 26;
+                }
+                response.Append(code2Char[code]);
+            }
+            return response.ToString();
+        }
+
+        public static int MaxPower(string s)
+        {
+            char currentChar = s[0];
+            int maxPower = 1;
+            int currentMax = 1;
+            for (int i = 1; i < s.Length; i++)
+            {
+                if(s[i] == currentChar)
+                {
+                    currentMax++;
+                }
+                else
+                {
+                    currentMax = 1;
+                    currentChar = s[i];
+                }
+                maxPower = Math.Max(maxPower, currentMax);
+            }
+            return maxPower;
+        }
+
+        public static int FindMaxConsecutiveOnes(int[] nums)
+        {
+            int maxConsecutiveOnes = 0;
+            int currentMax = 0;
+            for(int i = 0; i < nums.Length; i++)
+            {
+                if(nums[i] == 1)
+                {
+                    currentMax++;
+                }
+                else
+                {
+                    currentMax = 0;
+                }
+                maxConsecutiveOnes = Math.Max(maxConsecutiveOnes, currentMax);
+            }
+            return maxConsecutiveOnes;
+        }
+
+        
     }
 }

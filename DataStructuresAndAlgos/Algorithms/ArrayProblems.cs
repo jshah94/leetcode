@@ -984,7 +984,7 @@ namespace Algorithms
                 deleted.Add(item.Key, 0);
                 deleted.Add(item.Key - 1, 0);
                 deleted.Add(item.Key + 1, 0);
-                foreach(var it in dict)
+                foreach (var it in dict)
                 {
                     if (!deleted.ContainsKey(it.Key))
                     {
@@ -1059,13 +1059,13 @@ namespace Algorithms
         public static IList<IList<int>> Permute(int[] nums)
         {
             IList<IList<int>> response = new List<IList<int>>();
-            for(int i = 0; i < nums.Length; i++)
+            for (int i = 0; i < nums.Length; i++)
             {
                 IList<int> list = new List<int>();
                 list.Add(nums[i]);
                 var lst = nums.ToList();
                 lst.RemoveAt(i);
-                Permute(response, list,lst.ToArray());
+                Permute(response, list, lst.ToArray());
             }
 
             return response;
@@ -1078,7 +1078,7 @@ namespace Algorithms
                 response.Add(res);
                 return;
             }
-            for (int i = 0; i< nums.Length; i++)
+            for (int i = 0; i < nums.Length; i++)
             {
                 var _res = new List<int>(res);
                 _res.Add(nums[i]);
@@ -1118,6 +1118,92 @@ namespace Algorithms
                 }
             }
             return response;
+        }
+
+        public static int LongestOnes(int[] nums, int k)
+        {
+            List<int[]> twoStarts = new List<int[]>();
+            int longestOnes = 0;
+            int currentLongest = 0;
+            int l = 0;
+            while (l < nums.Length)
+            {
+                int[] startEnd = new int[2];
+                if (nums[l] == 1)
+                {
+                    startEnd[0] = l;
+                    l++;
+                    while (l < nums.Length && nums[l] == 1)
+                    {
+                        l++;
+                    }
+                    startEnd[1] = l - 1;
+                    twoStarts.Add(startEnd);
+                }
+                else
+                    l++;
+            }
+            if (twoStarts.Count > 0)
+            {
+                foreach (var start in twoStarts)
+                {
+                    int K = k;
+                    currentLongest = start[1] - start[0] + 1;
+                    for (int i = start[1] + 1; i < nums.Length; i++)
+                    {
+                        if (K == 0 && nums[i] != 1)
+                            break;
+                        if (nums[i] == 1)
+                            currentLongest++;
+                        else
+                        {
+                            if (K > 0)
+                            {
+                                currentLongest++;
+                                K--;
+                            }
+                        }
+                    }
+                    if (start[0] > 0 && K > 0)
+                    {
+                        int j = start[0] - 1;
+                        while (j >= 0 && (K > 0 || nums[j] == 1))
+                        {
+                            currentLongest++;
+                            K--;
+                            j--;
+                        }
+                    }
+                    longestOnes = Math.Max(longestOnes, currentLongest);
+                }
+            }
+            else
+                longestOnes = Math.Min(k, nums.Length);
+            return longestOnes;
+        }
+
+        public static bool ContainsNearbyDuplicate(int[] nums, int k)
+        {
+            Dictionary<int, List<int>> numbers = new Dictionary<int, List<int>>();
+            for(int i = 0; i < nums.Length; i++)
+            {
+                if(!numbers.ContainsKey(nums[i]))
+                    numbers.Add(nums[i], new List<int> { i });
+                else
+                    numbers[nums[i]].Add(i);
+            }
+            foreach (var item in numbers.Where(x => x.Value.Count > 1).ToList())
+            {
+                for(int i = item.Value.Count - 1; i > 0; i--)
+                {
+                    if(i > 0)
+                    {
+                        if (item.Value[i] - item.Value[i - 1] <= k)
+                            return true;
+                    }
+                }
+            }
+            return false;
         }
     }
 }

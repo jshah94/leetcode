@@ -10,8 +10,15 @@ namespace ConsoleApp1
     {
         static void Main(string[] args)
         {
-            BST bst = TreeProblems.ReconstructBst((new int[] {10, 4, 2, 1, 5, 17, 19, 18}).ToList());
-            Console.WriteLine(bst.value);
+            ArrayProblems.ContainsNearbyDuplicate(new int[] { 1, 2, 3, 1 }, 3);
+
+            //ArrayProblems.LongestOnes(new int[] { 0,0,0,1},3);
+
+            //Console.WriteLine(GeneralProblems.NthMagicalNumber(1,2,3));
+            //Console.WriteLine(StringProblems.CaesarCypherEncryptor("xyz", 2));
+
+            //BST bst = TreeProblems.ReconstructBst((new int[] {10, 4, 2, 1, 5, 17, 19, 18}).ToList());
+            //Console.WriteLine(bst.value);
             //ArrayProblems.ThreeSum(new int[] { -1, 0, 1, 2, -1, -4 });
 
             //ArrayProblems.Permute(new int[] { 1, 2, 3 });
