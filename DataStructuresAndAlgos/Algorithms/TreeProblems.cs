@@ -521,6 +521,40 @@ namespace Algorithms
             
             return new BST(preOrderTraversalValues[0], leftBst, rightBst);
         }
+
+        public int RangeSumBST(TreeNode root, int low, int high)
+        {
+            return RangeSumBST(root, low, high, 0);
+        }
+        public int RangeSumBST(TreeNode root, int low, int high, int sum)
+        {
+            if (root.val <= high && root.val >= low)
+                sum += root.val;
+            if (root.val <= high)
+                sum = RangeSumBST(root.right, low, high, sum);
+            if (root.val >= low)
+                sum = RangeSumBST(root.left, low, high, sum);
+            return sum;
+        }
+
+        public int MaxAncestorDiff(TreeNode root)
+        {
+            return Math.Max(MaxAncestorDiff(root.left, root.val, root.val, 0),
+                           MaxAncestorDiff(root.right, root.val, root.val, 0));
+        }
+
+        public int MaxAncestorDiff(TreeNode root, int max, int min, int maxDifference)
+        {
+            if (root == null)
+                return maxDifference;
+            if (root.val > max)
+                max = root.val;
+            else if (root.val < min)
+                min = root.val;
+            maxDifference = max - min;
+            return Math.Max(maxDifference, Math.Max(MaxAncestorDiff(root.left, max, min, maxDifference),
+                MaxAncestorDiff(root.right, max, min, maxDifference)));
+        }
     }
 
 }

@@ -1205,5 +1205,27 @@ namespace Algorithms
             }
             return false;
         }
+
+        //[0,1,0,3,12]
+        //try sliding window algorithm.
+        public static void MoveZeroes(int[] nums)
+        {
+            int zeros = 0;
+            int i = 0;
+            while(i < nums.Length)
+            {
+                if (nums[i] == 0)
+                {
+                    zeros++;
+                }
+                else if (zeros > 0)
+                {
+                    int start = i - zeros;
+                    nums[start] = nums[i];
+                    nums[i] = 0;
+                }
+                i++;
+            }
+        }
     }
 }

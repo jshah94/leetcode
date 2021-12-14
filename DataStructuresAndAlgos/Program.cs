@@ -10,7 +10,9 @@ namespace ConsoleApp1
     {
         static void Main(string[] args)
         {
-            ArrayProblems.ContainsNearbyDuplicate(new int[] { 1, 2, 3, 1 }, 3);
+            ArrayProblems.MoveZeroes(new int[] { 0, 1, 0, 3, 12 });
+
+            //ArrayProblems.ContainsNearbyDuplicate(new int[] { 1, 2, 3, 1 }, 3);
 
             //ArrayProblems.LongestOnes(new int[] { 0,0,0,1},3);
 
