@@ -522,5 +522,60 @@ namespace Algorithms
             }
             return false;
         }
+
+        public static int GuessNumber(int n)
+        {
+            int start = 1;
+            int end = n;
+            int mid = -1;
+            while (start <= end)
+            {
+                mid = (start + end) / 2;
+                int response = guess(mid);
+                if (response == 0)
+                    return mid;
+                else if (response < 0)
+                    end = mid - 1;
+                else
+                    start = mid + 1;
+            }
+            return mid;
+        }
+
+        public static int guess(int num)
+        {
+            if (num == 6)
+                return 0;
+            else if (num > 6)
+                return 1;
+            else
+                return -1;
+        }
+
+        public int FirstBadVersion(int n)
+        {
+            long left = 1;
+            long right = n;
+            long result = -1;
+            while (left <= right)
+            {
+                long mid = (left + right) / 2;
+                if (IsBadVersion((int)mid))
+                {
+                    result = mid;
+                    right = mid - 1;
+                }
+                else
+                {
+                    left = mid + 1;
+                }
+            }
+            return (int)result;
+        }
+
+        private bool IsBadVersion(int mid)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

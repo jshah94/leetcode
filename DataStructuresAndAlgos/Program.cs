@@ -10,7 +10,8 @@ namespace ConsoleApp1
     {
         static void Main(string[] args)
         {
-            ArrayProblems.MoveZeroes(new int[] { 0, 1, 0, 3, 12 });
+            GeneralProblems.GuessNumber(10);
+            //ArrayProblems.MoveZeroes(new int[] { 0, 1, 0, 3, 12 });
 
             //ArrayProblems.ContainsNearbyDuplicate(new int[] { 1, 2, 3, 1 }, 3);
 
