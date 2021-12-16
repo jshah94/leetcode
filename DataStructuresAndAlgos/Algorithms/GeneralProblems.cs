@@ -577,5 +577,45 @@ namespace Algorithms
         {
             throw new NotImplementedException();
         }
-    }
+
+        public int RomanToInt(string s)
+        {
+            int[] nums = new int[s.Length];
+            for (int i = 0; i < s.Length; i++)
+            {
+                nums[i] = GetIntFromRomanChar(s[i]);
+            }
+            int sum = 0;
+            for (int i = 0; i < nums.Length - 1; i++)
+            {
+                if (nums[i] < nums[i + 1])
+                    sum -= nums[i];
+                else
+                    sum += nums[i];
+            }
+            return sum + nums[nums.Length - 1];
+            
+        }
+        public int GetIntFromRomanChar(char roman)
+        {
+            switch (roman)
+            {
+                case 'I':
+                    return 1;
+                case 'V':
+                    return 5;
+                case 'X':
+                    return 10;
+                case 'L':
+                    return 50;
+                case 'C':
+                    return 100;
+                case 'D':
+                    return 500;
+                case 'M':
+                    return 1000;
+                default:
+                    return 0;
+            }
+        }
 }

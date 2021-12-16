@@ -6,64 +6,6 @@ namespace Algorithms
 {
     public class StringProblems
     {
-        public static int RomanToInt(string s)
-        {
-            int number = 0;
-            int previous = Int32.MaxValue;
-            for (int i = 0; i < s.Length; i++)
-            {
-                char romanChar = s[i];
-                int num = GetIntFromRomanChar(romanChar);
-                if (romanChar == 'I')
-                {
-                    int _num = 0;
-                    int j = i;
-                    while (s[j] == 'I' && j < s.Length)
-                    {
-                        _num++;
-                        j++;
-                    }
-                    num = _num;
-                    i = j - 1;
-                }
-                if (previous >= num)
-                {
-                    number += num;
-                }
-                else
-                {
-                    number -= previous;
-                    num -= previous;
-                    number += num;
-                }
-                previous = num;
-            }
-            return number;
-        }
-
-        public static int GetIntFromRomanChar(char roman)
-        {
-            switch (roman)
-            {
-                case 'I':
-                    return 1;
-                case 'V':
-                    return 5;
-                case 'X':
-                    return 10;
-                case 'L':
-                    return 50;
-                case 'C':
-                    return 100;
-                case 'D':
-                    return 500;
-                case 'M':
-                    return 1000;
-                default:
-                    return 0;
-            }
-        }
-
         public static int LongestSubStringWithoutRepeatingCharacters(string str)
         {
             if (string.IsNullOrEmpty(str))
