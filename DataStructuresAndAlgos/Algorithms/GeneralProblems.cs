@@ -594,7 +594,7 @@ namespace Algorithms
                     sum += nums[i];
             }
             return sum + nums[nums.Length - 1];
-            
+
         }
         public int GetIntFromRomanChar(char roman)
         {
@@ -618,4 +618,5 @@ namespace Algorithms
                     return 0;
             }
         }
+    }
 }

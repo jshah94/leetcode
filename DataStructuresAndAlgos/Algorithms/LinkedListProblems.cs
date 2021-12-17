@@ -164,21 +164,28 @@ namespace Algorithms
             return head;
         }
 
-        public ListNode ReverseList(ListNode head)
+        public static ListNode ReverseList(ListNode head)
         {
-            ListNode current = head;
-            ListNode previous = null;
+            ListNode hd = new ListNode();
+            ReverseList(head, hd);
+            return hd.next;
+        }
 
-            ListNode temp;
-
-            while (current != null)
+        public static ListNode ReverseList(ListNode node, ListNode head)
+        {
+            ListNode parent;
+            if (node.next != null)
             {
-                temp = current.next;
-                current.next = previous;
-                previous = current;
-                current = temp;
+                parent = ReverseList(node.next, head);
+                node.next = null;
             }
-            return previous;
+            else
+            {
+                head.next = node;
+                return node;
+            }
+            parent.next = node;
+            return parent.next;
         }
 
         public static ListNode DeleteDuplicates(ListNode head)
@@ -239,34 +246,37 @@ namespace Algorithms
             return curA;
         }
 
-        public ListNode RotateRight(ListNode head, int k)
+        public static ListNode RotateRight(ListNode head, int k)
         {
             if (head == null || head.next == null)
                 return head;
             int listLength = GetListLength(head);
             if (k > listLength)
             {
-                int n = listLength + 1;
-                while (k % n == 0)
-                    k = k / n;
+                int n = listLength;
+                k = k % n;
             }
-            for (int i = 0; i < k; i++)
+            ListNode first = head;
+            ListNode second = head;
+            int i = 0;
+            while (i < k && second != null)
             {
-                var current = head.next;
-                var previous = head;
-
-                while (current.next != null)
-                {
-                    previous = current;
-                    current = current.next;
-                }
-                current.next = head;
-                head = current;
-                previous.next = null;
+                i++;
+                second = second.next;
             }
+            if (second == null)
+                return head;
+            while (second.next != null)
+            {
+                second = second.next;
+                first = first.next;
+            }
+            second.next = head;
+            head = first.next;
+            first.next = null;
             return head;
         }
-        public int GetListLength(ListNode head)
+        public static int GetListLength(ListNode head)
         {
             if (head == null)
                 return 0;

@@ -10,7 +10,13 @@ namespace ConsoleApp1
     {
         static void Main(string[] args)
         {
-            GeneralProblems.GuessNumber(10);
+            ListNode listNode1 = new ListNode(1);
+            listNode1.next = new ListNode(2);
+            listNode1.next.next = new ListNode(3);
+            listNode1.next.next.next = new ListNode(4);
+            LinkedListProblems.ReverseList(listNode1);
+
+            //GeneralProblems.GuessNumber(10);
             //ArrayProblems.MoveZeroes(new int[] { 0, 1, 0, 3, 12 });
 
             //ArrayProblems.ContainsNearbyDuplicate(new int[] { 1, 2, 3, 1 }, 3);
