@@ -496,14 +496,14 @@ namespace Algorithms
         public static BST ReconstructBst(List<int> preOrderTraversalValues)
         {
             // Write your code here.
-            if(preOrderTraversalValues.Count == 1)
+            if (preOrderTraversalValues.Count == 1)
                 return new BST(preOrderTraversalValues[0]);
             if (preOrderTraversalValues.Count == 0)
                 return null;
             int rightPointer = preOrderTraversalValues.Count;
             BST rightBst = null;
             BST leftBst = null;
-            for(int i = 1; i < preOrderTraversalValues.Count; i++)
+            for (int i = 1; i < preOrderTraversalValues.Count; i++)
             {
                 if (preOrderTraversalValues[i] > preOrderTraversalValues[0])
                 {
@@ -514,11 +514,11 @@ namespace Algorithms
             if (rightPointer < preOrderTraversalValues.Count)
             {
                 rightBst = ReconstructBst(preOrderTraversalValues.Skip(rightPointer).ToList());
-                leftBst = ReconstructBst(preOrderTraversalValues.Skip(1).Take(rightPointer-1).ToList());
+                leftBst = ReconstructBst(preOrderTraversalValues.Skip(1).Take(rightPointer - 1).ToList());
             }
             else
                 leftBst = ReconstructBst(preOrderTraversalValues.Skip(1).ToList());
-            
+
             return new BST(preOrderTraversalValues[0], leftBst, rightBst);
         }
 
@@ -554,6 +554,80 @@ namespace Algorithms
             maxDifference = max - min;
             return Math.Max(maxDifference, Math.Max(MaxAncestorDiff(root.left, max, min, maxDifference),
                 MaxAncestorDiff(root.right, max, min, maxDifference)));
+        }
+
+        public static List<List<int>> swapNodes(List<List<int>> indexes, List<int> queries)
+        {
+            TreeNode root = new TreeNode(1);
+            root = GenerateTree(indexes, root);
+            List<List<int>> result = new List<List<int>>();
+            foreach (var k in queries)
+            {
+                List<int> l = new List<int>();
+                swap(root, k, 1, l);
+                result.Add(l);
+            }
+            return result;
+        }
+
+        public static TreeNode GenerateTree(List<List<int>> indexes, TreeNode root)
+        {
+            Queue<TreeNode> q = new Queue<TreeNode>();
+            q.Enqueue(root);
+            foreach (var item in indexes)
+            {
+                var temp = q.Dequeue();
+                if (item[0] != -1)
+                {
+                    temp.left = new TreeNode(item[0]);
+                    q.Enqueue(temp.left);
+                }
+                if (item[1] != -1)
+                {
+                    temp.right = new TreeNode(item[1]);
+                    q.Enqueue(temp.right);
+                }
+            }
+            return root;
+        }
+
+        public static void swap(TreeNode root, int k, int level, List<int> l)
+        {
+            if (root != null)
+            {
+                if (level % k == 0)
+                {
+                    var temp = root.left;
+                    root.left = root.right;
+                    root.right = temp;
+                }
+                swap(root.left, k, level + 1, l);
+                l.Add(root.val);
+                swap(root.right, k, level + 1, l);
+            }
+        }
+
+        public static List<double> AverageNodeValueByLevel(BinaryTree root)
+        {
+            Queue<BinaryTree> q = new Queue<BinaryTree>();
+            q.Enqueue(root);
+            List<double> respones = new List<double>();
+            while (q.Count > 0)
+            {
+                int n = q.Count;
+                int sum = 0;
+                for (int i = 0; i < n; i++)
+                {
+                    BinaryTree temp = q.Dequeue();
+                    if (temp.Left != null)
+                        q.Enqueue(temp.Left);
+                    if (temp.Right != null)
+                        q.Enqueue(temp.Right);
+                    sum += temp.Value;
+                }
+                respones.Add(sum / n);
+            }
+            return respones;
         }
     }
 

@@ -10,11 +10,48 @@ namespace ConsoleApp1
     {
         static void Main(string[] args)
         {
-            ListNode listNode1 = new ListNode(1);
-            listNode1.next = new ListNode(2);
-            listNode1.next.next = new ListNode(3);
-            listNode1.next.next.next = new ListNode(4);
-            LinkedListProblems.ReverseList(listNode1);
+            //StringProblems.IsIsomorphic("egg", "add");
+            //char[] ar = new char[4];
+            string[] a = "sss sss sss sss".Split(' ').ToArray();
+            //int[][] trips = new int[2][];
+            //trips[0] = new int[] { 2, 1, 5 };
+            //trips[1] = new int[] { 3, 3, 7 };
+            //ArrayProblems.CarPooling(trips, 4);
+            //var numbers = new int[] { 0, 1, 2, 3, 4 };
+            //try
+            //{
+            //    var e = numbers.GetEnumerator();
+            //    e.MoveNext();
+            //    Console.WriteLine(e.Current);
+            //    e.Reset();
+            //    Console.WriteLine(e.Current);
+            //}
+            //catch (Exception ex)
+            //{
+
+            //    throw ex;
+            //}
+
+            //Console.WriteLine(ArrayProblems.NumPairsDivisibleBy60(new int[] { 30, 20, 150, 100, 40 }));
+
+            //int[][] a = new int[2][];
+            //a[0] = new int[] { 1, 3 };
+            //a[1] = new int[] { 6, 9 };
+            //ArrayProblems.Insert(a, new int[] { 2,5 });
+
+
+            //int[][] matrix = new int[4][];
+            //matrix[0] = new int[] { 1, 0 };
+            //matrix[3] = new int[] { 2, 1 };
+            //matrix[2] = new int[] { 8, 1 };
+            //matrix[1] = new int[] { 15, 18 };
+            //var sorted = matrix.OrderBy(x => x[0]);
+
+            //ListNode listNode1 = new ListNode(1);
+            //listNode1.next = new ListNode(2);
+            //listNode1.next.next = new ListNode(3);
+            //listNode1.next.next.next = new ListNode(4);
+            //LinkedListProblems.ReverseList(listNode1);
 
             //GeneralProblems.GuessNumber(10);
             //ArrayProblems.MoveZeroes(new int[] { 0, 1, 0, 3, 12 });
@@ -89,11 +126,11 @@ namespace ConsoleApp1
             //StaircaseTraversal(5, 2);
             //PlusOne(new int[] { 9 });
             //NumDecodings("10112");
-            int[][] matrix = new int[4][];
-            matrix[0] = new int[] { 1, 0 };
-            matrix[1] = new int[] { 2, 1 };
-            matrix[2] = new int[] { 8, 1 };
-            matrix[3] = new int[] { 15, 18 };
+            //int[][] matrix = new int[4][];
+            //matrix[0] = new int[] { 1, 0 };
+            //matrix[1] = new int[] { 2, 1 };
+            //matrix[2] = new int[] { 8, 1 };
+            //matrix[3] = new int[] { 15, 18 };
             //Merge(matrix);
             //Rotate(matrix);
             //ListNode head;

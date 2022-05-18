@@ -446,11 +446,11 @@ namespace Algorithms
             map.Add(24, "Y");
             map.Add(25, "Z");
             StringBuilder title = new StringBuilder();
-            while(columnNumber > 0)
+            while (columnNumber > 0)
             {
                 int rem = (columnNumber - 1) % 26;
                 columnNumber = (columnNumber) / 26;
-                title.Insert(0,map[rem]);
+                title.Insert(0, map[rem]);
             }
             return title.ToString();
         }
@@ -522,7 +522,7 @@ namespace Algorithms
                 char c = str[i];
                 int code = alpha[c];
                 code += key;
-                if(code > 26)
+                if (code > 26)
                 {
                     code = code % 26;
                 }
@@ -538,7 +538,7 @@ namespace Algorithms
             int currentMax = 1;
             for (int i = 1; i < s.Length; i++)
             {
-                if(s[i] == currentChar)
+                if (s[i] == currentChar)
                 {
                     currentMax++;
                 }
@@ -556,9 +556,9 @@ namespace Algorithms
         {
             int maxConsecutiveOnes = 0;
             int currentMax = 0;
-            for(int i = 0; i < nums.Length; i++)
+            for (int i = 0; i < nums.Length; i++)
             {
-                if(nums[i] == 1)
+                if (nums[i] == 1)
                 {
                     currentMax++;
                 }
@@ -571,6 +571,35 @@ namespace Algorithms
             return maxConsecutiveOnes;
         }
 
-        
+        public int BitwiseComplement(int n)
+        {
+            List<string> binary = new List<string>();
+            int lastDiv = 0;
+            while (n > 0)
+            {
+                binary.Add((n % 2).ToString());
+                n = n / 2;
+                lastDiv = n;
+            }
+            binary.Add(lastDiv.ToString());
+            for (int i = 0; i < binary.Count; i++)
+            {
+                binary[i] = binary[i] == "0" ? "1" : "0";
+            }
+            string[] arr = binary.ToArray();
+            Array.Reverse(arr);
+            return 0;
+        }
+
+        public static bool IsIsomorphic(string s, string t)
+        {
+            if (s.Length != t.Length)
+                return false;
+            for (int i = 0; i < s.Length; i++)
+            {
+                s = s.Replace(s[i], t[i]);
+            }
+            return s == t;
+        }
     }
 }

@@ -1227,5 +1227,98 @@ namespace Algorithms
                 i++;
             }
         }
+
+        public static int[][] Insert(int[][] intervals, int[] newInterval)
+        {
+            List<int[]> response = new List<int[]>();
+            bool intervalAdded = false;
+            int i = 0;
+            while (i < intervals.Length)
+            {
+                if (!intervalAdded && newInterval[0] < intervals[i][0])
+                {
+                    response.Add(newInterval);
+                    intervalAdded = true;
+                }
+                response.Add(intervals[i]);
+                i++;
+            }
+            if (!intervalAdded)
+            {
+                response.Add(newInterval);
+            }
+            List<int[]> res = new List<int[]> { response[0] };
+            for (i = 1; i < response.Count; i++)
+            {
+                if (response[i][0] <= res[res.Count - 1][1])
+                {
+                    res[i - 1][1] = Math.Max(res[res.Count - 1][1], response[i][1]);
+                }
+                else
+                {
+                    res.Add(response[i]);
+                }
+            }
+            return res.ToArray();
+        }
+
+        public static int NumPairsDivisibleBy60(int[] time)
+        {
+            Array.Sort(time);
+            Dictionary<int, int> map = new Dictionary<int, int>();
+            for (int i = 0; i < time.Length; i++)
+            {
+                if (map.ContainsKey(time[i]))
+                    map[time[i]]++;
+                else
+                    map.Add(time[i], i);
+            }
+
+            int response = 0;
+            for (int i = 0; i < time.Length; i++)
+            {
+                if (time[i] % 60 == 0)
+                    response++;
+                else
+                {
+                    int r = time[i] % 60;
+                    int dif = 60 - r;
+                    if (map.ContainsKey(dif) && map[dif] > i)
+                        response++;
+                }
+            }
+            return response;
+        }
+
+        public static bool CarPooling(int[][] trips, int capacity)
+        {
+            int destination = getDestination(trips);
+            Dictionary<int, int> passengersIn = new Dictionary<int, int>();
+            Dictionary<int, int> passengersOut = new Dictionary<int, int>();
+            for (int i = 0; i < trips.Length; i++)
+            {
+                passengersIn.Add(trips[i][1], trips[i][0]);
+                passengersOut.Add(trips[i][2], trips[i][0]);
+            }
+            for (int i = 0; i <= destination; i++)
+            {
+                if (passengersOut.ContainsKey(i))
+                    capacity += passengersOut[i];
+                if (passengersIn.ContainsKey(i))
+                    capacity -= passengersIn[i];
+                if (capacity < 0)
+                    return false;
+            }
+            return true;
+        }
+        public static int getDestination(int[][] trips)
+        {
+            int max = 0;
+            for (int i = 0; i < trips.Length; i++)
+            {
+                max = Math.Max(max, trips[i][2]);
+            }
+            return max;
+        }
     }
 }
